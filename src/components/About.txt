@@ -1,0 +1,5 @@
+Compnents store the modules that are going to use in the projects
+
+data_ingestion : takes the input data or helps in importing data
+data_transformation : transfroms the data using one hot encoding or paramterizing the data
+model_trainer : using the models, creating the models
