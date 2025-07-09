@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        Dedicated to Riya — for inspiring every step of this journey.
+        Every project begins with you in my heart.
+    -->
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Student Exam Performance Indicator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <style>
         .gradient-bg {
             background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
@@ -13,27 +18,16 @@
         .card-shadow {
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .input-focus:focus {
-            box-shadow: 0 0 0 3px rgba(107, 115, 255, 0.3);
-        }
-        .result-animation {
-            animation: fadeIn 0.8s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body class="min-h-screen bg-gray-50">
+
     <div class="gradient-bg text-white py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
             <h1 class="text-3xl sm:text-4xl font-bold mb-4">
                 <i class="fas fa-graduation-cap mr-3"></i> Student Exam Performance Indicator
             </h1>
-            <p class="text-xl opacity-90">
-                Predict student performance based on various factors
-            </p>
+            <p class="text-xl opacity-90">Predict student performance based on various factors</p>
         </div>
     </div>
 
@@ -43,27 +37,24 @@
                 <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
                     <i class="fas fa-chart-line text-blue-500 mr-3"></i> Performance Prediction Form
                 </h2>
-                
-                <form id="predictionForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Flask form submission -->
+                <form action="{{ url_for('predict_datapoint') }}" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Gender -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            <i class="fas fa-venus-mars text-blue-400 mr-2"></i> Gender
-                        </label>
-                        <select name="gender" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent input-focus">
-                            <option value="">Select Gender</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-venus-mars text-blue-400 mr-2"></i> Gender</label>
+                        <select name="gender" required class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" disabled selected>Select Gender</option>
                             <option value="female">Female</option>
                             <option value="male">Male</option>
                         </select>
                     </div>
-                    
-                    <!-- Race/Ethnicity -->
+
+                    <!-- Ethnicity -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            <i class="fas fa-users text-blue-400 mr-2"></i> Race or Ethnicity
-                        </label>
-                        <select name="ethnicity" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent input-focus">
-                            <option value="">Select Ethnicity</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-users text-blue-400 mr-2"></i> Race or Ethnicity</label>
+                        <select name="ethnicity" required class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" disabled selected>Select Ethnicity</option>
                             <option value="group A">Group A</option>
                             <option value="group B">Group B</option>
                             <option value="group C">Group C</option>
@@ -71,14 +62,12 @@
                             <option value="group E">Group E</option>
                         </select>
                     </div>
-                    
+
                     <!-- Parental Education -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            <i class="fas fa-user-graduate text-blue-400 mr-2"></i> Parental Level of Education
-                        </label>
-                        <select name="parental_level_of_education" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent input-focus">
-                            <option value="">Select Education Level</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-user-graduate text-blue-400 mr-2"></i> Parental Level of Education</label>
+                        <select name="parental_level_of_education" required class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" disabled selected>Select Education Level</option>
                             <option value="high school">High School</option>
                             <option value="some high school">Some High School</option>
                             <option value="some college">Some College</option>
@@ -87,140 +76,78 @@
                             <option value="master's degree">Master's Degree</option>
                         </select>
                     </div>
-                    
-                    <!-- Lunch Type -->
+
+                    <!-- Lunch -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            <i class="fas fa-utensils text-blue-400 mr-2"></i> Lunch Type
-                        </label>
-                        <select name="lunch" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent input-focus">
-                            <option value="">Select Lunch Type</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-utensils text-blue-400 mr-2"></i> Lunch Type</label>
+                        <select name="lunch" required class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" disabled selected>Select Lunch Type</option>
                             <option value="standard">Standard</option>
                             <option value="free/reduced">Free/Reduced</option>
                         </select>
                     </div>
-                    
-                    <!-- Test Preparation -->
+
+                    <!-- Test Prep -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            <i class="fas fa-book-open text-blue-400 mr-2"></i> Test Preparation Course
-                        </label>
-                        <select name="test_preparation_course" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent input-focus">
-                            <option value="">Select Preparation Status</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-book-open text-blue-400 mr-2"></i> Test Preparation Course</label>
+                        <select name="test_preparation_course" required class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" disabled selected>Select Course</option>
                             <option value="none">None</option>
                             <option value="completed">Completed</option>
                         </select>
                     </div>
-                    
+
                     <!-- Writing Score -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            <i class="fas fa-pen-fancy text-blue-400 mr-2"></i> Writing Score (out of 100)
-                        </label>
-                        <input type="number" name="writing_score" min="0" max="100" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent input-focus" placeholder="Enter score (0-100)">
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-pen-fancy text-blue-400 mr-2"></i> Writing Score (out of 100)</label>
+                        <input type="number" name="writing_score" min="0" max="100" placeholder="Enter writing score" required class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                     </div>
-                    
+
                     <!-- Reading Score -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            <i class="fas fa-book-reader text-blue-400 mr-2"></i> Reading Score (out of 100)
-                        </label>
-                        <input type="number" name="reading_score" min="0" max="100" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent input-focus" placeholder="Enter score (0-100)">
+                        <label class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-book-reader text-blue-400 mr-2"></i> Reading Score (out of 100)</label>
+                        <input type="number" name="reading_score" min="0" max="100" placeholder="Enter reading score" required class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                     </div>
-                    
+
+                    <!-- Submit -->
                     <div class="md:col-span-2 flex justify-center mt-4">
                         <button type="submit" class="gradient-bg text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition duration-300 flex items-center">
                             <i class="fas fa-calculator mr-2"></i> Predict Performance
                         </button>
                     </div>
                 </form>
-                
-                <div id="resultContainer" class="mt-10 hidden">
+
+                {% if results %}
+                <div class="mt-10">
                     <div class="border-t border-gray-200 pt-6">
                         <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-chart-pie text-blue-500 mr-3"></i> Performance Prediction Result
+                            <i class="fas fa-chart-pie text-blue-500 mr-3"></i> Prediction Result
                         </h3>
-                        
-                        <div id="predictionResult" class="result-animation bg-blue-50 rounded-xl p-6">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h4 class="text-lg font-medium text-gray-800">THE PREDICTION IS:</h4>
-                                    <p id="resultText" class="text-2xl font-bold text-blue-600 mt-2">Loading...</p>
-                                </div>
-                                <div id="resultIcon" class="text-5xl">
-                                    <!-- Icon will be inserted here based on result -->
-                                </div>
-                            </div>
-                            
-                            <div id="resultDetails" class="mt-4 text-sm text-gray-600">
-                                <!-- Additional details will be inserted here -->
-                            </div>
+                        <div class="bg-blue-50 rounded-xl p-6">
+                            <p class="text-2xl font-bold text-blue-600">THE PREDICTION IS: {{ results }}</p>
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
 
-    <footer class="bg-gray-100 py-6">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
-            <p>© 2025 Student Performance Predictor. All rights reserved.</p>
-            <p class="mt-1">Data sourced from educational research datasets.</p>
+    <footer class="bg-gray-100 py-6 mt-8">
+        <div class="max-w-4xl mx-auto text-center text-gray-500 text-sm">
+            <p>
+                © 2025 Student Performance Predictor —
+                <a href="https://github.com/Lakshay-bleh/" title="Dedicated to Riya — my biggest supporter ❤️">
+                    By Lakshay Riya Jain
+                </a>
+            </p>
+            <p class="mt-1">Built with love and inspiration.</p>
         </div>
     </footer>
 
     <script>
-        document.getElementById('predictionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Show loading state
-            const resultContainer = document.getElementById('resultContainer');
-            const resultText = document.getElementById('resultText');
-            const resultIcon = document.getElementById('resultIcon');
-            const resultDetails = document.getElementById('resultDetails');
-            
-            resultContainer.classList.remove('hidden');
-            resultText.textContent = 'Analyzing data...';
-            resultIcon.innerHTML = '<i class="fas fa-spinner fa-spin text-blue-400"></i>';
-            resultDetails.innerHTML = '';
-            
-            // Simulate API call (replace with actual fetch to your endpoint)
-            setTimeout(() => {
-                // Mock response - in a real app, you would fetch from https://mlproject-l8mj.onrender.com/predictdata
-                const mockResponses = [
-                    { prediction: "High Performance", score: 85, details: "This student is predicted to perform exceptionally well based on the provided data." },
-                    { prediction: "Average Performance", score: 65, details: "The student is likely to perform at an average level. Some improvement areas identified." },
-                    { prediction: "Needs Improvement", score: 45, details: "The prediction suggests this student may need additional support to improve performance." }
-                ];
-                
-                const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
-                
-                resultText.textContent = randomResponse.prediction + ` (Score: ${randomResponse.score}/100)`;
-                
-                // Set appropriate icon based on performance
-                if (randomResponse.score >= 70) {
-                    resultIcon.innerHTML = '<i class="fas fa-trophy text-yellow-500"></i>';
-                } else if (randomResponse.score >= 50) {
-                    resultIcon.innerHTML = '<i class="fas fa-check-circle text-green-500"></i>';
-                } else {
-                    resultIcon.innerHTML = '<i class="fas fa-exclamation-triangle text-orange-500"></i>';
-                }
-                
-                resultDetails.innerHTML = `
-                    <p>${randomResponse.details}</p>
-                    <div class="mt-4">
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: ${randomResponse.score}%"></div>
-                        </div>
-                        <div class="flex justify-between text-xs text-gray-500 mt-1">
-                            <span>0</span>
-                            <span>50</span>
-                            <span>100</span>
-                        </div>
-                    </div>
-                `;
-            }, 1500);
-        });
+        console.log("To Riya: Every line of this project holds a piece of my heart. 💙");
     </script>
+
 </body>
 </html>

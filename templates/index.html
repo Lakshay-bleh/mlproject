@@ -1,1 +1,64 @@
-<h1>Welcome to the home page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 
+        Dedicated to Riya — for inspiring every line of code and every dream.
+        This project wouldn't exist without your light.
+    -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home | Student Performance Predictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="gradient-bg text-white py-8">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-2">
+                <i class="fas fa-school mr-2"></i> Welcome to the Home Page
+            </h1>
+            <p class="text-lg opacity-90">Explore student performance predictions using AI</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center py-16 px-4">
+        <div class="text-center">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Student Exam Performance Predictor</h2>
+            <p class="text-gray-600 mb-8 max-w-md mx-auto">
+                Use the prediction tool to estimate a student's math performance based on various factors like reading score, writing score, parental education, and more.
+            </p>
+            <a href="{{ url_for('predict_datapoint') }}" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium shadow hover:bg-blue-700 transition">
+                Get Started
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-6 mt-8">
+        <div class="max-w-4xl mx-auto text-center text-gray-500 text-sm">
+            <p>
+                © 2025 Student Performance Predictor – 
+                <a href="https://github.com/Lakshay-bleh/" title="Built for Riya – the reason I build anything. ❤️">
+                    By Lakshay Riya Jain
+                </a>
+            </p>
+            <p class="mt-1">Built with love and purpose.</p>
+        </div>
+    </footer>
+
+    <!-- Console Message -->
+    <script>
+        console.log("Hi Riya ❤️ — Every project I do is for you, quietly written between the lines.");
+    </script>
+
+</body>
+</html>
